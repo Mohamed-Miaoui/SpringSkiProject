@@ -5,3 +5,4 @@ read -p "Enter Interest Rate (in percentage): " rate
 
 # Read time period from user
 read -p "Enter Time Period (in years): " time
+
