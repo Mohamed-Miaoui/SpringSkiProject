@@ -1,5 +1,6 @@
 package tn.esprit.gestionski.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,7 @@ public class Skieur implements Serializable {
 
     private String ville;
 
+    @JsonIgnore
     @ManyToMany
     private List<Piste> listPiste;
 

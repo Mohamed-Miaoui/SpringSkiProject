@@ -18,22 +18,22 @@ public class SkieurController {
         return SkieurServiceImp.addSkieur(f);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/updateSkieur")
     public Skieur updateSkieur(@RequestBody Skieur f){
         return SkieurServiceImp.updateSkieur(f);
     }
 
-    @GetMapping("/getall")
+    @GetMapping("/skieurs")
     public List<Skieur> findAllSkieur(){
         return SkieurServiceImp.findAllSkieur();
     }
 
-    @GetMapping("/getbyid/{id}")
+    @GetMapping("/getSkieurbyid/{id}")
     public Skieur findByIdSkieur(@PathVariable long id){ //@PathVariable cuz we pass the id in paramete to the path / when we passe just a variable
         return SkieurServiceImp.findByIdSkieur(id);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/deleteSkieur/{id}")
     public void deleteById(@PathVariable long id){
         SkieurServiceImp.deleteSkieur(id);
     }

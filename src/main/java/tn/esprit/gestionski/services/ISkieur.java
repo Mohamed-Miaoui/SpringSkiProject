@@ -5,9 +5,10 @@ import tn.esprit.gestionski.entities.Skieur;
 import java.util.List;
 
 public interface ISkieur {
-    public Skieur addSkieur(Skieur f);
-    public Skieur updateSkieur(Skieur f);
+    public Skieur addSkieur(Skieur s);
+    public Skieur updateSkieur(Skieur s);
     public List<Skieur> findAllSkieur();
     public Skieur findByIdSkieur(long id);
     public void deleteSkieur(long id);
+    public Skieur assignSkierToPiste(Long numSkieur, Long numPiste);
 }
