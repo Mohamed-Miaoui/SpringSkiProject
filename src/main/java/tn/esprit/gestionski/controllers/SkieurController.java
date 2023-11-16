@@ -3,6 +3,8 @@ package tn.esprit.gestionski.controllers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.gestionski.entities.Inscription;
+import tn.esprit.gestionski.entities.Piste;
 import tn.esprit.gestionski.entities.Skieur;
 import tn.esprit.gestionski.services.SkieurServiceImp;
 
@@ -36,6 +38,15 @@ public class SkieurController {
     @DeleteMapping("/deleteSkieur/{id}")
     public void deleteById(@PathVariable long id){
         SkieurServiceImp.deleteSkieur(id);
+    }
+
+    @PostMapping("/assignSkierToPiste/{numSkieur}/{numPiste}")
+    public Skieur assignSkierToPiste(@PathVariable long numPiste, @PathVariable long numSkieur){
+        return SkieurServiceImp.assignSkierToPiste(numSkieur,numPiste);
+    }
+    @PostMapping("/assignSkierToCour/{numCour}")
+    public Skieur assignSkierToCour(@RequestBody  Skieur skieur, @PathVariable Long numCour) {
+        return SkieurServiceImp.assignSkierToCour(skieur,numCour);
     }
 
 }

@@ -32,6 +32,7 @@ public class Skieur implements Serializable {
     @ManyToMany
     private List<Piste> listPiste;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "skieur")
     private List<Inscription> inscriptions;
 

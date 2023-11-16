@@ -44,9 +44,9 @@ public class InscriptionController {
         //InscriptionServiceImp.deleteInscription(id);
         iinscritption.deleteInscription(id);
     }
-    @PostMapping("/addAndAssignSkieur/{isSkieur}")
-    public Inscription addInscriptionandAssaginSkieur(@RequestBody Inscription inscription,@PathVariable long idSkieur){
-        return iinscritption.addInscriptionandAssaginSkieur(inscription,idSkieur);
+    @PostMapping("/addAndAssignSkieur/{numSkieur}")
+    public Inscription addInscriptionandAssaginSkieur(@RequestBody Inscription inscription,@PathVariable long numSkieur){
+        return iinscritption.addInscriptionandAssaginSkieur(inscription,numSkieur);
     }
     @PostMapping("/addAndAssignCours/{numCours}")
     public Inscription addInscriptionandAssaginCour(@RequestBody Inscription inscription,@PathVariable long numCours){
