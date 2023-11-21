@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import tn.esprit.gestionski.entities.Inscription;
 import tn.esprit.gestionski.entities.Piste;
 import tn.esprit.gestionski.entities.Skieur;
+import tn.esprit.gestionski.entities.TypeAbonnement;
+import tn.esprit.gestionski.repositories.SkieurRepository;
 import tn.esprit.gestionski.services.SkieurServiceImp;
 
 import java.util.List;
@@ -14,6 +16,8 @@ import java.util.List;
 @RestController
 public class SkieurController {
     private SkieurServiceImp SkieurServiceImp;
+    private SkieurRepository skieurRepository;
+
 
     @PostMapping("/addSkieur")
     public Skieur addSkieur(@RequestBody Skieur f){ // @RequestBody when we pass object
@@ -47,6 +51,11 @@ public class SkieurController {
     @PostMapping("/assignSkierToCour/{numCour}")
     public Skieur assignSkierToCour(@RequestBody  Skieur skieur, @PathVariable Long numCour) {
         return SkieurServiceImp.assignSkierToCour(skieur,numCour);
+    }
+
+    @GetMapping("/retreiveSkieurByTypeAbonnement/{typeAbonnement}")
+    public List<Skieur> retreiveSkieurByTypeAbonnement(@PathVariable  TypeAbonnement typeAbonnement){
+        return skieurRepository.findByAbonnement_TypeAbon(typeAbonnement);
     }
 
 }

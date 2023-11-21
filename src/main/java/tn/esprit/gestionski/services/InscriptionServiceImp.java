@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import tn.esprit.gestionski.entities.Cours;
 import tn.esprit.gestionski.entities.Inscription;
 import tn.esprit.gestionski.entities.Skieur;
+import tn.esprit.gestionski.entities.Support;
 import tn.esprit.gestionski.repositories.CoursRepository;
 import tn.esprit.gestionski.repositories.InscriptionRepository;
 import tn.esprit.gestionski.repositories.SkieurRepository;
@@ -56,5 +57,20 @@ public class InscriptionServiceImp implements Iinscritption{
         Cours c = coursRepository.findById(numCours).orElse(null);
         inscription.setCours(c);
         return inscriptionRepository.save(inscription);
+    }
+    //22 24 25 a faire
+    @Override
+    public Inscription addRegistrationAndAssignToSkierAndCourse(Inscription inscription, Long numSkieur, Long numCours) {
+        Cours c = coursRepository.findById(numCours).orElse(null);
+        Skieur sk = skieurRepository.findById(numSkieur).orElse(null);
+//        if(c.getTypeCours() == "COLLECTIF_ENFANT"){
+//
+//        }
+        return null;
+    }
+
+    @Override
+    public List<Integer> numWeeksCourseOfInstructorBySupport(Long nummoniteur, Support support) {
+        return inscriptionRepository.numWeeksCourseOfInstructorBySupport(nummoniteur ,support);
     }
 }

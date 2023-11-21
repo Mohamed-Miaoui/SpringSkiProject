@@ -1,17 +1,18 @@
 package tn.esprit.gestionski.services;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import tn.esprit.gestionski.entities.Cours;
-import tn.esprit.gestionski.entities.Inscription;
-import tn.esprit.gestionski.entities.Piste;
-import tn.esprit.gestionski.entities.Skieur;
+import tn.esprit.gestionski.entities.*;
 import tn.esprit.gestionski.repositories.CoursRepository;
+import tn.esprit.gestionski.repositories.InscriptionRepository;
 import tn.esprit.gestionski.repositories.PisteRepository;
 import tn.esprit.gestionski.repositories.SkieurRepository;
 
 import java.util.List;
 
+@Slf4j
 @AllArgsConstructor
 @Service
 public class SkieurServiceImp implements ISkieur{
@@ -19,6 +20,7 @@ public class SkieurServiceImp implements ISkieur{
     private SkieurRepository skieurRepository;
     private PisteRepository pisteRepository;
     private CoursRepository coursRepository;
+    private InscriptionRepository inscriptionRepository;
     private List<Piste> pistes;
     @Override
     public Skieur addSkieur(Skieur s) {
@@ -64,8 +66,22 @@ public class SkieurServiceImp implements ISkieur{
         for ( Inscription i  : inscriptions ){
             i.setSkieur(savedSkieur);
             i.setCours(cours);
+            inscriptionRepository.save(i);
         }
         return savedSkieur;
     }
+
+    @Override
+    public List<Skieur> retreiveSkieurByTypeAbonnement(TypeAbonnement typeAbonnement) {
+        return skieurRepository.findByAbonnement_TypeAbon(typeAbonnement);
+    }
+//    @Scheduled(fixedRate = 30000)
+//    public  void fixedRate(){
+//        log.info("methode with fixed rate");
+//    }
+//    @Scheduled(cron = "0 34 16 * * *")
+//    public  void cronMethode(){
+//        log.info("methode with Cron");
+//    }
 
 }

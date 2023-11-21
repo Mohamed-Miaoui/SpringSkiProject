@@ -4,6 +4,7 @@ package tn.esprit.gestionski.controllers;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.gestionski.entities.Inscription;
+import tn.esprit.gestionski.entities.Support;
 import tn.esprit.gestionski.services.Iinscritption;
 import tn.esprit.gestionski.services.InscriptionServiceImp;
 
@@ -51,6 +52,11 @@ public class InscriptionController {
     @PostMapping("/addAndAssignCours/{numCours}")
     public Inscription addInscriptionandAssaginCour(@RequestBody Inscription inscription,@PathVariable long numCours){
         return iinscritption.addInscriptionandAssaginCours(inscription,numCours);
+    }
+
+    @GetMapping("/numWeeksCourseOfInstructorBySup/{nummoniteur}/{support}")
+    public  List<Integer> numWeeksCourseOfInstructorBySup(@PathVariable Long nummoniteur,@PathVariable Support support){
+        return iinscritption.numWeeksCourseOfInstructorBySupport(nummoniteur,support);
     }
 
 }

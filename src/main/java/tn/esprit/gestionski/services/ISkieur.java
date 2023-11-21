@@ -1,6 +1,7 @@
 package tn.esprit.gestionski.services;
 
 import tn.esprit.gestionski.entities.Skieur;
+import tn.esprit.gestionski.entities.TypeAbonnement;
 
 import java.util.List;
 
@@ -13,5 +14,7 @@ public interface ISkieur {
     public Skieur assignSkierToPiste(Long numSkieur, Long numPiste);
 
     public Skieur assignSkierToCour(Skieur skieur, Long numCour);
+
+    public List<Skieur> retreiveSkieurByTypeAbonnement(TypeAbonnement typeAbonnement);
 
 }
