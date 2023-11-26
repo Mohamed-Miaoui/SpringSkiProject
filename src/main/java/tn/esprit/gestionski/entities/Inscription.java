@@ -19,11 +19,12 @@ public class Inscription  implements Serializable {
     private Long numInscription;
 
     private int numSemaine;
-    @JsonIgnore
+
+
     @ManyToOne
     private Cours cours;
 
-    @JsonIgnore
+
     @ManyToOne
     private Skieur skieur;
 }

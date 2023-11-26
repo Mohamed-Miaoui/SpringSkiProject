@@ -1,14 +1,12 @@
 package tn.esprit.gestionski.services;
 
 import lombok.AllArgsConstructor;
+import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import tn.esprit.gestionski.entities.*;
-import tn.esprit.gestionski.repositories.CoursRepository;
-import tn.esprit.gestionski.repositories.InscriptionRepository;
-import tn.esprit.gestionski.repositories.PisteRepository;
-import tn.esprit.gestionski.repositories.SkieurRepository;
+import tn.esprit.gestionski.repositories.*;
 
 import java.util.List;
 
@@ -20,6 +18,7 @@ public class SkieurServiceImp implements ISkieur{
     private SkieurRepository skieurRepository;
     private PisteRepository pisteRepository;
     private CoursRepository coursRepository;
+    private AbonnementRepository abonnementRepository;
     private InscriptionRepository inscriptionRepository;
     private List<Piste> pistes;
     @Override
@@ -75,6 +74,25 @@ public class SkieurServiceImp implements ISkieur{
     public List<Skieur> retreiveSkieurByTypeAbonnement(TypeAbonnement typeAbonnement) {
         return skieurRepository.findByAbonnement_TypeAbon(typeAbonnement);
     }
+
+    //homework------------------
+    @Override
+    public Skieur getSkieurByAbbon(Abonnement abonnement) {
+        return skieurRepository.findByAbonnement(abonnement);
+    }
+
+    //HOMEWORK------------------
+    @Scheduled(cron = "0 0 1 * * ")
+    public void showMonthlyRecurringRevenue(){
+        float mrr = 0;
+       List<Abonnement> allAbonn = abonnementRepository.findAll();
+        for (Abonnement ab:allAbonn) {
+            mrr= mrr + ab.getPrixAbon();
+        }
+        log.info("The MRR is : " + mrr);
+    }
+
+
 //    @Scheduled(fixedRate = 30000)
 //    public  void fixedRate(){
 //        log.info("methode with fixed rate");

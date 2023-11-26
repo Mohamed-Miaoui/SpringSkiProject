@@ -14,4 +14,5 @@ public interface IAbonnement {
     public void deleteAbonnement(long id);
     List<Abonnement> getAbonnementByTypeAbon(TypeAbonnement typeAbonnement);
     List<Abonnement> getdateinBetween(Date dateDebut , Date datend);
+    void findByDatelessThan7();
 }

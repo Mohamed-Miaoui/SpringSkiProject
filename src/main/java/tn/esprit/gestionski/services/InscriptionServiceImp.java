@@ -2,14 +2,12 @@ package tn.esprit.gestionski.services;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import tn.esprit.gestionski.entities.Cours;
-import tn.esprit.gestionski.entities.Inscription;
-import tn.esprit.gestionski.entities.Skieur;
-import tn.esprit.gestionski.entities.Support;
+import tn.esprit.gestionski.entities.*;
 import tn.esprit.gestionski.repositories.CoursRepository;
 import tn.esprit.gestionski.repositories.InscriptionRepository;
 import tn.esprit.gestionski.repositories.SkieurRepository;
 
+import java.util.Date;
 import java.util.List;
 
 @AllArgsConstructor
@@ -58,15 +56,23 @@ public class InscriptionServiceImp implements Iinscritption{
         inscription.setCours(c);
         return inscriptionRepository.save(inscription);
     }
-    //22 24 25 a faire
+    //homework---------------------------------------------------
     @Override
     public Inscription addRegistrationAndAssignToSkierAndCourse(Inscription inscription, Long numSkieur, Long numCours) {
         Cours c = coursRepository.findById(numCours).orElse(null);
         Skieur sk = skieurRepository.findById(numSkieur).orElse(null);
-//        if(c.getTypeCours() == "COLLECTIF_ENFANT"){
-//
-//        }
-        return null;
+
+        Date currentDate = new Date();
+        Date birthday =sk.getDateNaissance();
+        int age = currentDate.getYear() - birthday.getYear();
+
+        if((c.getTypeCours() == Typecours.COLLECTIF_ENFANT || c.getTypeCours() == Typecours.COLLECTIF_ADULTE) && age >16){
+        inscription.setCours(c);
+        inscription.setSkieur(sk);
+        return inscriptionRepository.save(inscription);
+        }else {
+            return null;
+        }
     }
 
     @Override

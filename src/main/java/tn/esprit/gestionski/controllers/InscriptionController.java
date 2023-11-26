@@ -58,5 +58,14 @@ public class InscriptionController {
     public  List<Integer> numWeeksCourseOfInstructorBySup(@PathVariable Long nummoniteur,@PathVariable Support support){
         return iinscritption.numWeeksCourseOfInstructorBySupport(nummoniteur,support);
     }
+    //homework------------------------------
+    @PostMapping("/addAndAssignCoursAndSkieur/{numsk}/{numCours}")
+    public Inscription addRegistrationAndAssignToSkierAndCourse(@RequestBody Inscription inscription,@PathVariable long numsk,@PathVariable long numCours){
+        return iinscritption.addRegistrationAndAssignToSkierAndCourse(inscription,numsk,numCours);
+    }
+
+
+
+
 
 }

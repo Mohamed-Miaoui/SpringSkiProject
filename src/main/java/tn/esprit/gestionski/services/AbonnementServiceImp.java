@@ -1,7 +1,9 @@
 package tn.esprit.gestionski.services;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.repository.query.Param;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import tn.esprit.gestionski.entities.Abonnement;
 import tn.esprit.gestionski.entities.TypeAbonnement;
@@ -10,10 +12,12 @@ import tn.esprit.gestionski.repositories.AbonnementRepository;
 import java.util.Date;
 import java.util.List;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class AbonnementServiceImp implements IAbonnement{
     AbonnementRepository abonnementRepository;
+    SkieurServiceImp skieurServiceImp ;
     @Override
     public Abonnement addAbonnement(Abonnement c) {
         return abonnementRepository.save(c);
@@ -49,4 +53,19 @@ public class AbonnementServiceImp implements IAbonnement{
         return abonnementRepository.findByDateDebutBetween(dateDebut,datend);
     }
 
+    //Homework-------------------------------
+    @Scheduled(fixedRate = 30000)
+    @Override
+    public void findByDatelessThan7() {
+        Date currentDate = new Date();
+        List<Abonnement> abonnements = abonnementRepository.findAll();
+        for (Abonnement ab : abonnements) {
+            Date dateFin = ab.getDateFin();
+            Integer dayLeft = dateFin.getDate() - currentDate.getDate();
+            if ( dayLeft <= 7 && dayLeft >0){
+                log.info(" the subscription : "+ ab + " the owner id  : "+ skieurServiceImp.getSkieurByAbbon(ab).getNumSkieur()+ "firstname :" + skieurServiceImp.getSkieurByAbbon(ab).getNomS() +" lastname : "+  skieurServiceImp.getSkieurByAbbon(ab).getPrenomS());
+            }
+        }
+
+    }
 }

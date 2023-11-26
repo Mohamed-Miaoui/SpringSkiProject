@@ -5,10 +5,12 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 
 @Getter
 @Setter
@@ -32,7 +34,7 @@ public class Skieur implements Serializable {
     @ManyToMany
     private List<Piste> listPiste;
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "skieur")
     private List<Inscription> inscriptions;
 
