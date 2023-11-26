@@ -54,7 +54,7 @@ public class AbonnementServiceImp implements IAbonnement{
     }
 
     //Homework-------------------------------
-    @Scheduled(fixedRate = 30000)
+    //@Scheduled(fixedRate = 30000)
     @Override
     public void findByDatelessThan7() {
         Date currentDate = new Date();

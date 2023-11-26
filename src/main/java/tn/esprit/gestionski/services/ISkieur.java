@@ -15,6 +15,7 @@ public interface ISkieur {
     public Skieur assignSkierToPiste(Long numSkieur, Long numPiste);
 
     public Skieur assignSkierToCour(Skieur skieur, Long numCour);
+    public Skieur assignSkierToAbonnement(Long idSki, Long numAbonn);
 
     public List<Skieur> retreiveSkieurByTypeAbonnement(TypeAbonnement typeAbonnement);
 

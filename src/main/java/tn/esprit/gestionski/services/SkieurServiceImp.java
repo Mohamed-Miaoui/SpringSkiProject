@@ -71,6 +71,16 @@ public class SkieurServiceImp implements ISkieur{
     }
 
     @Override
+    public Skieur assignSkierToAbonnement(Long idSki, Long numAbonn) {
+        Abonnement abonnementSelected = abonnementRepository.getReferenceById(numAbonn);
+        Skieur skieurSelected = skieurRepository.getReferenceById(idSki);
+        skieurSelected.setAbonnement(abonnementSelected);
+        skieurRepository.save(skieurSelected);
+
+        return null;
+    }
+
+    @Override
     public List<Skieur> retreiveSkieurByTypeAbonnement(TypeAbonnement typeAbonnement) {
         return skieurRepository.findByAbonnement_TypeAbon(typeAbonnement);
     }
@@ -82,7 +92,7 @@ public class SkieurServiceImp implements ISkieur{
     }
 
     //HOMEWORK------------------
-    @Scheduled(cron = "0 0 1 * * ")
+    @Scheduled(cron = "0 0 1 * * * ")
     public void showMonthlyRecurringRevenue(){
         float mrr = 0;
        List<Abonnement> allAbonn = abonnementRepository.findAll();

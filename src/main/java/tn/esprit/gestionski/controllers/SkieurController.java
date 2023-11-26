@@ -12,6 +12,7 @@ import tn.esprit.gestionski.services.SkieurServiceImp;
 
 import java.util.List;
 
+
 @AllArgsConstructor
 @RestController
 public class SkieurController {
@@ -51,6 +52,11 @@ public class SkieurController {
     @PostMapping("/assignSkierToCour/{numCour}")
     public Skieur assignSkierToCour(@RequestBody  Skieur skieur, @PathVariable Long numCour) {
         return SkieurServiceImp.assignSkierToCour(skieur,numCour);
+    }
+    @PostMapping("/assignSkierToAbonnement/{idSki}/{numAbonn}")
+    public Skieur assignSkierToAbonnement(@PathVariable Long idSki, @PathVariable Long numAbonn) {
+
+        return SkieurServiceImp.assignSkierToAbonnement(idSki, numAbonn);
     }
 
     @GetMapping("/retreiveSkieurByTypeAbonnement/{typeAbonnement}")
